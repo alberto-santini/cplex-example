@@ -1,0 +1,26 @@
+# Object files and libraries
+*.slo
+*.lo
+*.o
+*.obj
+*.ii
+*.s
+*.so
+*.dylib
+*.dll
+*.lai
+*.la
+*.a
+*.lib
+
+# Support files
+.history
+*.lp
+
+# Cmake-related
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+install_manifest.txt
+build
