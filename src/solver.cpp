@@ -18,18 +18,18 @@ namespace tsp_example {
     //    x[i][j] == 1            If arc (i,j) is selected
     //    x[i][j] == 0            Otherwise
     //
-    // INTEGER VARIABLE t[i]    For all i = 0, ..., n - 1
-    //    t[i] == k              Iff node i is the k-th node in the tour
+    // INTEGER VARIABLE t[i]      For all i = 0, ..., n - 1
+    //    t[i] == k               Iff node i is the k-th node in the tour
     //    t[0] == 1
-    //    t[i] in [2, ..., n]    For all i = 1, ... n - 1
+    //    t[i] in [2, ..., n]     For all i = 1, ... n - 1
     //
     // OBJECTIVE FUNCTION
     //    MIN sum((i,j), c[i][j] * x[i][j])
     //
     // CONSTRAINTS
-    //  1) sum(j, x[j][i]) == 1                        For all i
-    //  2) sum(j, x[i][j]) == 1                        For all i
-    //  3) t[i] - t[j] + 1 <= n * (1 - x[i][j])       For all i,j = 1, ..., n - 1
+    //  1) sum(j, x[j][i]) == 1                    For all i
+    //  2) sum(j, x[i][j]) == 1                    For all i
+    //  3) t[i] - t[j] + 1 <= n * (1 - x[i][j])    For all i,j = 1, ..., n - 1
     //    Can be written as:
     //    t[i] - t[j] + n * x[i][j] <= n - 1
 
