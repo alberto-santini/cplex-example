@@ -17,4 +17,4 @@
 
 ### Structure
 
-The `Graph` class (`src/graph.h`) is a minimal description of a graph; it only stores the number of nodes and the distance matrix. The graph is created randomly, with nodes lying on a plane and euclidean distances. The `Solver` class does all the CPLEX magic: it builds the model, it solves it, and it prints the solution.
+The `Graph` class (`src/graph.h`) is a minimal description of a graph; it only stores the number of nodes and the distance matrix. The graph is created randomly, with nodes lying on a plane and euclidean distances. The `Solver` class (`src/solver.h`) does all the CPLEX magic: it builds the model, it solves it, and it prints the solution.
