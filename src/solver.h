@@ -20,7 +20,7 @@ namespace tsp_example {
     void print_solution(std::ostream& out, const IloCplex& cplex, const IloArray<IloNumVarArray>& x) const;
     
   public:
-    explicit Solver(const Graph& g) : g(g) {}
+    explicit Solver(const Graph& g) : g{g} {}
     void solve_and_print() const;
   };
 }
