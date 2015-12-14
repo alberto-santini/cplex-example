@@ -132,7 +132,7 @@ namespace tsp_example {
     // Create the solver object
     IloCplex cplex(model);
 
-    // Export model to file (useful to debug!)
+    // Export model to file (useful for debugging!)
     cplex.exportModel("model.lp");
     
     bool solved = false;
