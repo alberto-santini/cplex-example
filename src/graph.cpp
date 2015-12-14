@@ -23,7 +23,7 @@ namespace tsp_example {
     costs = cost_matrix_type(n_nodes, cost_row_type(n_nodes));
 
     for(auto i = 0u; i < costs.size(); ++i) {
-      costs[i][i] = square_size * 2;
+      costs[i][i] = square_size * square_size;
       for(auto j = i + 1; j < costs[i].size(); ++j) {
         auto dist = std::sqrt(std::pow(x_coord[i] - x_coord[j], 2.0) + std::pow(y_coord[i] - y_coord[j], 2.0));
         costs[i][j] = dist;
