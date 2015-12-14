@@ -126,6 +126,9 @@ namespace tsp_example {
     // Add the objective function to the model
     model.add(obj);
 
+    // Free the momery used by expr
+    expr.end();
+
     // Create the solver object
     IloCplex cplex(model);
 
