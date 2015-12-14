@@ -23,7 +23,7 @@ set(SOURCE_FILES
     src/graph.cpp
     src/solver.h
     src/solver.cpp
-	src/main.cpp)
+    src/main.cpp)
 
 add_executable(tsp_example ${SOURCE_FILES})
 target_link_libraries(tsp_example ${CPLEX_LIBRARIES})
