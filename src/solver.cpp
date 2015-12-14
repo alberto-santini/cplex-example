@@ -100,7 +100,7 @@ namespace tsp_example {
     // Create constraints 3)
     // The constraint is for i = 1,...,n and therefore we add empty constraints for i == 0
     mtz[0] = IloRangeArray(env);
-    // The we continue normally for all other i > 0
+    // We then continue normally for all other i > 0
     for(auto i = 1; i < n; ++i) {
       mtz[i] = IloRangeArray(env, n);
       for(auto j = 1; j < n; ++j) {
