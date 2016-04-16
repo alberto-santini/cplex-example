@@ -49,16 +49,16 @@ namespace tsp_example {
     t[0] = IloNumVar(env, 1, 1, IloNumVar::Int, "t_0");
 
     // Create variables t[1], ..., t[n]
-    for(auto i = 0; i < n; ++i) {
+    for(auto i = 0u; i < n; ++i) {
       name << "t_" << i;
       t[i] = IloNumVar(env, 2, n, IloNumVar::Int, name.str().c_str());
       name.str(""); // Clean name
     }
 
     // Create variables x
-    for(auto i = 0; i < n; ++i) {
+    for(auto i = 0u; i < n; ++i) {
       x[i] = IloNumVarArray(env, n);
-      for(auto j = 0; j < n; ++j) {
+      for(auto j = 0u; j < n; ++j) {
         name << "x_" << i << "_" << j;
         x[i][j] = IloNumVar(env, 0, 1, IloNumVar::Bool, name.str().c_str());
         name.str(""); // Clean name
@@ -68,8 +68,8 @@ namespace tsp_example {
     IloExpr expr(env);
 
     // Create constraints 1)
-    for(auto i = 0; i < n; ++i) {
-      for(auto j = 0; j < n; ++j) {
+    for(auto i = 0u; i < n; ++i) {
+      for(auto j = 0u; j < n; ++j) {
         expr += x[j][i];
       }
 
@@ -83,8 +83,8 @@ namespace tsp_example {
     model.add(inbound_arcs);
 
     // Create constraints 2)
-    for(auto i = 0; i < n; ++i) {
-      for(auto j = 0; j < n; ++j) {
+    for(auto i = 0u; i < n; ++i) {
+      for(auto j = 0u; j < n; ++j) {
         expr += x[i][j];
       }
 
@@ -101,10 +101,10 @@ namespace tsp_example {
     // The constraint is for i = 1,...,n and therefore we add empty constraints for i == 0
     mtz[0] = IloRangeArray(env);
     // We then continue normally for all other i > 0
-    for(auto i = 1; i < n; ++i) {
+    for(auto i = 1u; i < n; ++i) {
       mtz[i] = IloRangeArray(env, n);
-      for(auto j = 1; j < n; ++j) {
-        expr = t[i] - t[j] + n * x[i][j];
+      for(auto j = 1u; j < n; ++j) {
+        expr = t[i] - t[j] + static_cast<int>(n) * x[i][j];
 
         name << "mtz_" << i << "_" << j;
         mtz[i][j] = IloRange(env, -IloInfinity, expr, n - 1, name.str().c_str());
@@ -116,8 +116,8 @@ namespace tsp_example {
     }
 
     // Create objective function
-    for(auto i = 0; i < n; ++i) {
-      for(auto j = 0; j < n; ++j) {
+    for(auto i = 0u; i < n; ++i) {
+      for(auto j = 0u; j < n; ++j) {
         expr += g.cost(i, j) * x[i][j];
       }
     }
@@ -164,17 +164,17 @@ namespace tsp_example {
   
   void Solver::print_solution(std::ostream& out, const IloCplex& cplex, const IloArray<IloNumVarArray>& x) const {
     auto n = g.size();
-    auto almost_equal = [] (double x, double y) {
-      double magnitude = 10e3;
-      return std::abs(x-y) < magnitude * std::numeric_limits<double>::epsilon() * std::abs(x+y) || std::abs(x-y) < std::numeric_limits<double>::min();
+    auto almost_equal = [] (float x, float y) {
+      float magnitude = 10e3;
+      return std::abs(x-y) < magnitude * std::numeric_limits<float>::epsilon() * std::abs(x+y) || std::abs(x-y) < std::numeric_limits<float>::min();
     };
 
     assert(x.getSize() == n);
 
     out << std::endl << std::endl << "Solution:" << std::endl;
-    for(auto i = 0; i < n; ++i) {
+    for(auto i = 0u; i < n; ++i) {
       assert(x[i].getSize() == n);
-      for(auto j = 0; j < n; ++j) {
+      for(auto j = 0u; j < n; ++j) {
         if(almost_equal(cplex.getValue(x[i][j]), 1)) {
           out << i << " -> " << j << std::endl;
         }

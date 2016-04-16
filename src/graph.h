@@ -6,22 +6,23 @@
 
 namespace tsp_example {
   class Graph {
-    using cost_type = double;
+    using cost_type = float;
     using cost_row_type = std::vector<cost_type>;
     using cost_matrix_type = std::vector<cost_row_type>;
     
-    int n_nodes;
+    uint32_t n_nodes;
     cost_matrix_type costs;
     
-    void generate_random_euclidean_cost_matrix(int square_size);
+    void generate_random(float square_side);
     
   public:
-    explicit Graph(int n_nodes);
-    std::ostream& print(std::ostream& out) const;
+    explicit Graph(uint32_t n_nodes);
     
-    int size() const { return n_nodes; }
-    double cost(int i, int j) const { return costs[i][j]; }
+    uint32_t size() const { return n_nodes; }
+    float cost(uint32_t i, uint32_t j) const { return costs[i][j]; }
+    friend std::ostream& operator<<(std::ostream& out, const Graph& g);
   };
+  
 }
 
 #endif
