@@ -1,11 +1,11 @@
-## Small CPLEX Callable API tutorial
+#### Small CPLEX Callable API tutorial
 
-### Prerequisites
+##### Prerequisites
 
 * CPLEX must be installed. I assume that the installation directory is `/opt/ibm`. If you installed CPLEX somewhere else, edit `CPLEX_ROOT_DIR` in `CMakeLists.txt`.
 * A modern version of GCC that supports C++14 is required.
 
-### Compile and run
+##### Compile and run
 
 * Create a build directory within the root directory of this project: `mkdir build`.
 * Move to the build directory: `cd build`.
@@ -15,6 +15,10 @@
 * Run make: `make -j2`.
 * Run the executable: `./tsp_example`.
 
-### Structure
+##### Structure
 
 The `Graph` class (`src/graph.h`) is a minimal description of a graph; it only stores the number of nodes and the distance matrix. The graph is created randomly, with nodes lying on a plane and euclidean distances. The `Solver` class (`src/solver.h`) does all the CPLEX magic: it builds the model, it solves it, and it prints the solution.
+
+##### License
+
+The present work is distributed under the terms of ghe GNU General Public License v3 (see the `LICENSE` file).
