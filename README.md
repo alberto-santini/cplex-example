@@ -2,17 +2,20 @@
 
 ##### Prerequisites
 
-* CPLEX must be installed. I assume that the installation directory is `/opt/ibm`. If you installed CPLEX somewhere else, edit `CPLEX_ROOT_DIR` in `CMakeLists.txt`.
-* A modern version of GCC that supports C++14 is required.
+* CPLEX must be installed, of course. Academics can obtain it via the [IBM Academic Initiative](https://developer.ibm.com/academic/).
+* You also need a modern version of GCC, that supports at least [C++14](https://en.wikipedia.org/wiki/C++14).
 
 ##### Compile and run
 
-* Create a build directory within the root directory of this project: `mkdir build`.
+* Get the code: `git clone https://github.com/alberto-santini/tsp_example.git`.
+* Move the new directory: `cd tsp_example`.
+* Create a build directory: `mkdir build`.
 * Move to the build directory: `cd build`.
-* Run cmake: `CXX=/path/to/your/g++ cmake -DCMAKE_BUILD_TYPE=Debug ..`.
-  * Substitute the path of your g++ appropriately, or leave out the part with `CXX` if g++ is in your `PATH`.
+* Run cmake: `cmake -DCPLEX_ROOT_DIR=/path/to/ilog -DCMAKE_BUILD_TYPE=Debug ..`.
+  * The path to your CPLEX installation must be such that `/path/to/ilog/cplex/include/ilcplex/cplex.h` exists.
+  * If you compiler is in a non-standard location, you can prepend `CXX=/path/to/g++` to the above command.
   * Change `Debug` into `Release` if you want to compile in release mode.
-* Run make: `make -j2`.
+* Run make: `make`.
 * Run the executable: `./tsp_example`.
 
 ##### Structure
