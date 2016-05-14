@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8.4)
 project(tsp_example)
 
-set(CPLEX_ROOT_DIR "/opt/ibm" CACHE FILEPATH "IBM Cplex")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -DIL_STD -m64 -Wall -Werror")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og -ggdb")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG -O3 -flto")
