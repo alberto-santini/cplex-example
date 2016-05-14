@@ -1,4 +1,4 @@
-#### Small CPLEX Callable API tutorial
+#### Small CPLEX C++ API tutorial
 
 ##### Prerequisites
 
