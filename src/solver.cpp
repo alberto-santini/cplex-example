@@ -27,21 +27,22 @@ namespace tsp_example {
     //    MIN sum((i,j), c[i][j] * x[i][j])
     //
     // CONSTRAINTS
-    //  1) sum(j, x[j][i]) == 1                    For all i
-    //  2) sum(j, x[i][j]) == 1                    For all i
-    //  3) t[i] - t[j] + 1 <= n * (1 - x[i][j])    For all i,j = 1, ..., n - 1
-    //    Can be written as:
-    //    t[i] - t[j] + n * x[i][j] <= n - 1
+    //    1) sum(j, x[j][i]) == 1                    For all i
+    //    2) sum(j, x[i][j]) == 1                    For all i
+    //    3) t[i] - t[j] + 1 <= n * (1 - x[i][j])    For all i,j = 1, ..., n - 1
+    //       Can be written as:
+    //       t[i] - t[j] + n * x[i][j] <= n - 1
 
     // Variables
     IloArray<IloNumVarArray> x(env, n);
     IloNumVarArray t(env, n);
 
     // Constraints
-    IloRangeArray inbound_arcs(env, n);
-    IloRangeArray outbound_arcs(env, n);
-    IloArray<IloRangeArray> mtz(env, n);
+    IloRangeArray inbound_arcs(env, n);  // Constraints 1)
+    IloRangeArray outbound_arcs(env, n); // Constraints 2)
+    IloArray<IloRangeArray> mtz(env, n); // Constraints 3)
 
+    // We use this stringstream to create variable and constraint names
     std::stringstream name;
 
     // Create variable t[0] and fix it to value 1
@@ -126,7 +127,7 @@ namespace tsp_example {
     // Add the objective function to the model
     model.add(obj);
 
-    // Free the momery used by expr
+    // Free the memory used by expr
     expr.end();
 
     // Create the solver object
@@ -138,6 +139,7 @@ namespace tsp_example {
     bool solved = false;
     
     try {
+      // Try to solve CPLEX (and hope it does not raise an exception!)
       solved = cplex.solve();
     } catch(const IloException& e) {
       std::cerr << std::endl << std::endl;
@@ -148,6 +150,7 @@ namespace tsp_example {
     }
 
     if(solved) {
+      // If CPLEX successfully solved the model, print the results
       std::cout << std::endl << std::endl;
       std::cout << "Cplex success!" << std::endl;
       std::cout << "\tStatus: " << cplex.getStatus() << std::endl;
@@ -164,17 +167,19 @@ namespace tsp_example {
   
   void Solver::print_solution(std::ostream& out, const IloCplex& cplex, const IloArray<IloNumVarArray>& x) const {
     auto n = g.size();
+    assert(x.getSize() == n);
+    
+    // Tells if two floating-point numbers are equal (for all practical purposes)
     auto almost_equal = [] (float x, float y) {
       float magnitude = 10e3;
       return std::abs(x-y) < magnitude * std::numeric_limits<float>::epsilon() * std::abs(x+y) || std::abs(x-y) < std::numeric_limits<float>::min();
     };
 
-    assert(x.getSize() == n);
-
     out << std::endl << std::endl << "Solution:" << std::endl;
     for(auto i = 0u; i < n; ++i) {
       assert(x[i].getSize() == n);
       for(auto j = 0u; j < n; ++j) {
+        // If variable x[i][j] is 1, the arc (i,j) was included in the optimal solution
         if(almost_equal(cplex.getValue(x[i][j]), 1)) {
           out << i << " -> " << j << std::endl;
         }

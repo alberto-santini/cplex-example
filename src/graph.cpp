@@ -20,7 +20,7 @@ namespace tsp_example {
     std::generate(x_coord.begin(), x_coord.end(), [&] () { return dist(mt); });
     std::generate(y_coord.begin(), y_coord.end(), [&] () { return dist(mt); });
 
-    costs = cost_matrix_type(n_nodes, cost_row_type(n_nodes));
+    costs = std::vector<std::vector<float>>(n_nodes, std::vector<float>(n_nodes));
 
     for(auto i = 0u; i < costs.size(); ++i) {
       costs[i][i] = 999 * square_side;
@@ -34,7 +34,7 @@ namespace tsp_example {
   
   std::ostream& operator<<(std::ostream& out, const Graph& g) {
     for(const auto& row : g.costs) {
-      std::copy(row.begin(), row.end(), std::ostream_iterator<Graph::cost_type>(out, "\t"));
+      std::copy(row.begin(), row.end(), std::ostream_iterator<float>(out, "\t"));
       out << std::endl;
     }
     return out;
