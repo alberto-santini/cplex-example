@@ -8,7 +8,7 @@
 ##### Compile and run
 
 * Get the code: `git clone https://github.com/alberto-santini/tsp_example.git`.
-* Move the new directory: `cd tsp_example`.
+* Move to the new directory: `cd tsp_example`.
 * Create a build directory: `mkdir build`.
 * Move to the build directory: `cd build`.
 * Run cmake: `cmake -DCPLEX_ROOT_DIR=/path/to/ilog -DCMAKE_BUILD_TYPE=Debug ..`.
