@@ -3,9 +3,9 @@
 #include <iostream>
 
 int main() {
-  using namespace tsp_example;
+  using namespace cplex_example;
   
-  auto n_nodes = 50u;
+  auto n_nodes = 40u;
   auto graph = Graph(n_nodes);
   auto solver = Solver(graph);
   

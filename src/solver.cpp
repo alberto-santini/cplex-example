@@ -2,7 +2,7 @@
 #include <cmath>
 #include <limits>
 
-namespace tsp_example {
+namespace cplex_example {
   void Solver::solve_and_print() const {
     auto n = g.size();
 
@@ -135,9 +135,9 @@ namespace tsp_example {
 
     // Export model to file (useful for debugging!)
     cplex.exportModel("model.lp");
-    
+
     bool solved = false;
-    
+
     try {
       // Try to solve CPLEX (and hope it does not raise an exception!)
       solved = cplex.solve();
@@ -164,11 +164,11 @@ namespace tsp_example {
 
     env.end();
   }
-  
+
   void Solver::print_solution(std::ostream& out, const IloCplex& cplex, const IloArray<IloNumVarArray>& x) const {
     auto n = g.size();
     assert(x.getSize() == n);
-    
+
     // Tells if two floating-point numbers are equal (for all practical purposes)
     auto almost_equal = [] (float x, float y) {
       float magnitude = 10e3;

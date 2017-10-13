@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 
-namespace tsp_example {
+namespace cplex_example {
   class Graph {
     // Number of nodes in the graph.
     // Nodes go from 0 to n_nodes - 1.

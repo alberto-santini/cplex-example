@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.4)
-project(tsp_example)
+project(cplex_example)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -DIL_STD -m64 -Wall -Werror")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og -ggdb")
@@ -24,5 +24,5 @@ set(SOURCE_FILES
     src/solver.cpp
     src/main.cpp)
 
-add_executable(tsp_example ${SOURCE_FILES})
-target_link_libraries(tsp_example ${CPLEX_LIBRARIES})
+add_executable(cplex_example ${SOURCE_FILES})
+target_link_libraries(cplex_example ${CPLEX_LIBRARIES})

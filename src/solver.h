@@ -13,7 +13,7 @@
 ILOSTLBEGIN
 // End magic tricks
 
-namespace tsp_example {
+namespace cplex_example {
   class Solver {
     // The graph on which we are solving the TSP.
     const Graph& g;

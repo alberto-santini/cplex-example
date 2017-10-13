@@ -7,8 +7,8 @@
 
 ##### Compile and run
 
-* Get the code: `git clone https://github.com/alberto-santini/tsp_example.git`.
-* Move to the new directory: `cd tsp_example`.
+* Get the code: `git clone https://github.com/alberto-santini/cplex_example.git`.
+* Move to the new directory: `cd cplex_example`.
 * Create a build directory: `mkdir build`.
 * Move to the build directory: `cd build`.
 * Run cmake: `cmake -DCPLEX_ROOT_DIR=/path/to/ilog -DCMAKE_BUILD_TYPE=Debug ..`.
@@ -16,7 +16,7 @@
   * If you compiler is in a non-standard location, you can prepend `CXX=/path/to/g++` to the above command.
   * Change `Debug` into `Release` if you want to compile in release mode.
 * Run make: `make`.
-* Run the executable: `./tsp_example`.
+* Run the executable: `./cplex_example`.
 
 ##### Structure
 

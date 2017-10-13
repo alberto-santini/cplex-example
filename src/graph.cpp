@@ -4,7 +4,7 @@
 #include <iterator>
 #include <algorithm>
 
-namespace tsp_example {
+namespace cplex_example {
   Graph::Graph(uint32_t n_nodes) : n_nodes{n_nodes} {
     generate_random(100);
   }
