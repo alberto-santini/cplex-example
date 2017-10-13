@@ -11,9 +11,9 @@
 * Move to the new directory: `cd cplex_example`.
 * Create a build directory: `mkdir build`.
 * Move to the build directory: `cd build`.
-* Run cmake: `cmake -DCPLEX_ROOT_DIR=/path/to/ilog -DCMAKE_BUILD_TYPE=Debug ..`.
-  * The path to your CPLEX installation must be such that `/path/to/ilog/cplex/include/ilcplex/cplex.h` exists.
-  * If you compiler is in a non-standard location, you can prepend `CXX=/path/to/g++` to the above command.
+* Run cmake: `cmake -DCPLEX_ROOT_DIR=</path/to/ilog> -DCMAKE_BUILD_TYPE=Debug ..`.
+  * The path to your CPLEX installation must be such that `</path/to/ilog>/cplex/include/ilcplex/cplex.h` exists.
+  * If your compiler is in a non-standard location, you can use `-DCMAKE_CXX_COMPILER=</path/to/compiler>`.
   * Change `Debug` into `Release` if you want to compile in release mode.
 * Run make: `make`.
 * Run the executable: `./cplex_example`.
