@@ -24,3 +24,7 @@ Makefile
 cmake_install.cmake
 install_manifest.txt
 build
+
+# CLion
+.idea
+cmake-build-*
