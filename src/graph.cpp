@@ -5,7 +5,7 @@
 #include <algorithm>
 
 namespace cplex_example {
-  Graph::Graph(uint32_t n_nodes) : n_nodes{n_nodes} {
+  Graph::Graph(std::uint32_t n_nodes) : n_nodes{n_nodes} {
     generate_random(100);
   }
   
@@ -25,7 +25,7 @@ namespace cplex_example {
     for(auto i = 0u; i < costs.size(); ++i) {
       costs[i][i] = 999 * square_side;
       for(auto j = i + 1; j < costs[i].size(); ++j) {
-        auto dist = std::sqrt(std::pow(x_coord[i] - x_coord[j], 2.0) + std::pow(y_coord[i] - y_coord[j], 2.0));
+        const auto dist = std::sqrt(std::pow(x_coord[i] - x_coord[j], 2.0) + std::pow(y_coord[i] - y_coord[j], 2.0));
         costs[i][j] = dist;
         costs[j][i] = dist;
       }
@@ -35,7 +35,7 @@ namespace cplex_example {
   std::ostream& operator<<(std::ostream& out, const Graph& g) {
     for(const auto& row : g.costs) {
       std::copy(row.begin(), row.end(), std::ostream_iterator<float>(out, "\t"));
-      out << std::endl;
+      out << "\n";
     }
     return out;
   }

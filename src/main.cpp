@@ -5,9 +5,9 @@
 int main() {
   using namespace cplex_example;
   
-  auto n_nodes = 40u;
-  auto graph = Graph(n_nodes);
-  auto solver = Solver(graph);
+  const auto n_nodes = 40u;
+  const auto graph = Graph(n_nodes);
+  const auto solver = Solver(graph);
   
   solver.solve_and_print();
   
