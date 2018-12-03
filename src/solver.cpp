@@ -4,7 +4,7 @@
 
 namespace cplex_example {
   void Solver::solve_and_print() const {
-    auto n = g.size();
+    const auto n = g.size();
 
     // CPLEX environment. Takes care of everything, including memory management for CPLEX objects.
     IloEnv env;
@@ -139,51 +139,49 @@ namespace cplex_example {
     bool solved = false;
 
     try {
-      // Try to solve CPLEX (and hope it does not raise an exception!)
+      // Try to solve with CPLEX (and hope it does not raise an exception!)
       solved = cplex.solve();
     } catch(const IloException& e) {
-      std::cerr << std::endl << std::endl;
-      std::cerr << "CPLEX Raised an exception:" << std::endl;
-      std::cerr << e << std::endl;
+      std::cerr << "\n\nCPLEX Raised an exception:\n";
+      std::cerr << e << "\n";
       env.end();
       throw;
     }
 
     if(solved) {
       // If CPLEX successfully solved the model, print the results
-      std::cout << std::endl << std::endl;
-      std::cout << "Cplex success!" << std::endl;
-      std::cout << "\tStatus: " << cplex.getStatus() << std::endl;
-      std::cout << "\tObjective value: " << cplex.getObjValue() << std::endl;
-      print_solution(std::cout, cplex, x);
+      std::cout << "\n\nCplex success!\n";
+      std::cout << "\tStatus: " << cplex.getStatus() << "\n";
+      std::cout << "\tObjective value: " << cplex.getObjValue() << "\n";
+      print_solution(cplex, x);
     } else {
-      std::cerr << "Cplex error!" << std::endl;
-      std::cerr << "\tStatus: " << cplex.getStatus() << std::endl;
-      std::cerr << "\tSolver status: " << cplex.getCplexStatus() << std::endl;
+      std::cerr << "\n\nCplex error!\n";
+      std::cerr << "\tStatus: " << cplex.getStatus() << "\n";
+      std::cerr << "\tSolver status: " << cplex.getCplexStatus() << "\n";
     }
 
     env.end();
   }
 
-  void Solver::print_solution(std::ostream& out, const IloCplex& cplex, const IloArray<IloNumVarArray>& x) const {
-    auto n = g.size();
+  void Solver::print_solution(const IloCplex& cplex, const IloArray<IloNumVarArray>& x) const {
+    const auto n = g.size();
     assert(x.getSize() == n);
 
-    // Tells if two floating-point numbers are equal (for all practical purposes)
-    auto almost_equal = [] (float x, float y) {
-      float magnitude = 10e3;
-      return std::abs(x-y) < magnitude * std::numeric_limits<float>::epsilon() * std::abs(x+y) || std::abs(x-y) < std::numeric_limits<float>::min();
-    };
+    std::cout << "\n\nTour: ";
 
-    out << std::endl << std::endl << "Solution:" << std::endl;
-    for(auto i = 0u; i < n; ++i) {
-      assert(x[i].getSize() == n);
-      for(auto j = 0u; j < n; ++j) {
-        // If variable x[i][j] is 1, the arc (i,j) was included in the optimal solution
-        if(almost_equal(cplex.getValue(x[i][j]), 1)) {
-          out << i << " -> " << j << std::endl;
+    const auto starting_vertex = 0u;
+    auto current_vertex = starting_vertex;
+    
+    do {
+      std::cout << current_vertex << " ";
+      for(auto i = 0u; i < n; ++i) {
+        if(cplex.getValue(x[current_vertex][i]) > .5) {
+          current_vertex = i;
+          break;
         }
       }
-    }
+    } while(current_vertex != starting_vertex);
+
+    std::cout << "\n";
   }
 }

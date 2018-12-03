@@ -18,8 +18,8 @@ namespace cplex_example {
     // The graph on which we are solving the TSP.
     const Graph& g;
     
-    // Prints out the integer solution obtained by CPLEX.
-    void print_solution(std::ostream& out, const IloCplex& cplex, const IloArray<IloNumVarArray>& x) const;
+    // Prints the integer solution obtained by CPLEX to stdout.
+    void print_solution(const IloCplex& cplex, const IloArray<IloNumVarArray>& x) const;
     
   public:
     
