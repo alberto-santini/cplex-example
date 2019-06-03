@@ -50,7 +50,7 @@ namespace cplex_example {
     t[0] = IloNumVar(env, 1, 1, IloNumVar::Int, "t_0");
 
     // Create variables t[1], ..., t[n]
-    for(auto i = 0u; i < n; ++i) {
+    for(auto i = 1u; i < n; ++i) {
       name << "t_" << i;
       t[i] = IloNumVar(env, 2, n, IloNumVar::Int, name.str().c_str());
       name.str(""); // Clean name
